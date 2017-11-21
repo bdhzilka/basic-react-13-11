@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Article from './Article'
 import PropTypes from 'prop-types'
 import accordion from "../decorators/accordion"
+import memoize from  "../decorators/memoize"
 
 class ArticleList extends Component {
 
@@ -16,7 +17,7 @@ class ArticleList extends Component {
         const articleElements = articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      isOpen = {isOpen(article.id)}
-                     toggleOpen = {this.toggleOpenArticle}
+                     toggleOpen = {this.memoizedToogleOpenArticle(article.id)}
             />
         </li>)
         return (
@@ -26,7 +27,8 @@ class ArticleList extends Component {
         )
     }
 
-    toggleOpenArticle = openArticleId => this.props.toggleOpen(openArticleId)
+    toggleOpenArticle = openArticleId => () => this.props.toggleOpen(openArticleId)
+    memoizedToogleOpenArticle = memoize(this.toggleOpenArticle)
 }
 
 export default accordion(ArticleList)
