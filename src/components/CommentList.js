@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
+
 class CommentList extends Component {
+    static propTypes = {
+        isOpen: PropTypes.bool.isRequired,
+        comments: PropTypes.array,
+        toggleOpen: PropTypes.func.isRequired
+    }
+
     render() {
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'

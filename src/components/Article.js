@@ -9,8 +9,8 @@ class Article extends PureComponent {
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
-        isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
+        isOpen: PropTypes.bool.isRequired,
+        toggleOpen: PropTypes.func.isRequired
     }
 
     constructor(props) {
