@@ -7,5 +7,10 @@ export default class Accordion extends Component {
 
     isOpen = id => this.state.openId === id
 
-    toggleOpen = openId => this.setState({openId})
+    toggleOpen = openId => {
+        if (this.state.openId === openId) {
+            openId = null;
+        }
+        this.setState({openId})
+    }
 }

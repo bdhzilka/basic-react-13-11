@@ -15,7 +15,12 @@ export default (OriginalComponent) => class AccordionComponent extends React.Com
         )
     }
 
-    toggleOpen = openId => this.setState({openId})
+    toggleOpen = openId => {
+        if (this.state.openId === openId) {
+            openId = null;
+        }
+        this.setState({openId})
+    }
 
     isOpen = id => this.state.openId === id
 }
