@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import InputField from './InputField/index'
 
 export default class CommentForm extends Component {
     render() {
@@ -6,12 +7,12 @@ export default class CommentForm extends Component {
             <div>
                 <div>
                     <span>Username:</span>
-                    <input></input>
+                    <InputField tag="input" max={100} min={10}></InputField>
                 </div>
 
                 <div>
                     <span>Text:</span>
-                    <textarea></textarea>
+                    <InputField tag="textarea" max={100} min={20}></InputField>
                 </div>
             </div>
         )
