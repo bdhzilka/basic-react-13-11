@@ -1,5 +1,5 @@
 import {INCREMENT, DELETE_ARTICLE} from '../constants'
-import {SET_DATE_RANGE} from "../constants/index";
+import {SET_DATE_RANGE, SELECT_ARTICLES} from "../constants/index";
 
 export function increment() {
     const action = { type: INCREMENT }
@@ -17,5 +17,12 @@ export function setDateRange(dateRange) {
     return {
         type: SET_DATE_RANGE,
         payload: { ...dateRange }
+    }
+}
+
+export function setSelectedArticles(selected) {
+    return {
+        type: SELECT_ARTICLES,
+        payload: { selected }
     }
 }

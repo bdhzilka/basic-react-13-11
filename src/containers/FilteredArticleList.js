@@ -2,15 +2,20 @@ import { connect } from 'react-redux'
 import ArticleList from "../components/ArticleList";
 import { DateUtils } from 'react-day-picker'
 
+const isInDateRange = (date, dateRange) => {
+    return !dateRange.from || !dateRange.to || DateUtils.isDayInRange(date, dateRange)
+}
+
 const getFilteredArticles = (articles, filters) => {
     const {dateRange} = filters
+    const selectedArticlesCount = articles.filter(article => article.selected).length
+
     return articles.filter(article => {
-        const date = new Date(article.date)
-        return !dateRange.from || !dateRange.to || DateUtils.isDayInRange(date, dateRange)
+        return isInDateRange(new Date(article.date), dateRange) && (!selectedArticlesCount || article.selected)
     })
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     articles: getFilteredArticles(state.articles, state.filters)
 })
 
