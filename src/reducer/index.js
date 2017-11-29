@@ -6,5 +6,7 @@ import {dateRange} from './filters'
 export default combineReducers({
     counter: counterReducer,
     articles,
-    dateRange
+    filters: combineReducers({
+        dateRange
+    })
 })
