@@ -6,8 +6,7 @@ const isInDateRange = (date, dateRange) => {
     return !dateRange.from || !dateRange.to || DateUtils.isDayInRange(date, dateRange)
 }
 
-const getFilteredArticles = (articles, filters) => {
-    const {dateRange} = filters
+const getFilteredArticles = (articles, dateRange) => {
     const selectedArticlesCount = articles.filter(article => article.selected).length
 
     return articles.filter(article => {
@@ -16,7 +15,7 @@ const getFilteredArticles = (articles, filters) => {
 }
 
 const mapStateToProps = state => ({
-    articles: getFilteredArticles(state.articles, state.filters)
+    articles: getFilteredArticles(state.articles, state.dateRange)
 })
 
 const FilteredArticleList = connect(

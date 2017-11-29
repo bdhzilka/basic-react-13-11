@@ -35,7 +35,7 @@ class DateRange extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    ...state.filters.dateRange
+    ...state.dateRange
 })
 
 export default connect(mapStateToProps, {
