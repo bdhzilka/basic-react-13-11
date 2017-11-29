@@ -25,11 +25,13 @@ class SelectFilter extends Component {
             const option = {
                 label: article.title,
                 value: article.id,
+                selectedIndex: article.selectedIndex
             }
             options.push(option)
-            if (article.selected) {
+            if (article.selectedIndex >= 0) {
                 selectedOptions.push(option)
             }
+            selectedOptions.sort((a, b) => a.selectedIndex - b.selectedIndex)
         })
 
         return <Select

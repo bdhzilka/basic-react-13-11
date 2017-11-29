@@ -14,7 +14,7 @@ class Article extends PureComponent {
             text: PropTypes.string,
             comments: PropTypes.array,
             date: PropTypes.string.isRequired,
-            selected: PropTypes.bool
+            selectedIndex: PropTypes.number
         }).isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func

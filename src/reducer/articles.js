@@ -9,7 +9,11 @@ export default (articlesState = defaultArticles, action) => {
         case DELETE_ARTICLE:
             return articlesState.filter(article => article.id !== payload.id)
         case SELECT_ARTICLES:
-            return articlesState.map(article => ({...article, selected: payload.selected.includes(article.id)}))
+            return articlesState.map(article => {
+                const selectedIndex = payload.selected.findIndex(selectedId => selectedId == article.id)
+                return {...article, selectedIndex}
+            })
+
     }
 
     return articlesState

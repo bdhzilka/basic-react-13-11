@@ -6,11 +6,13 @@ const isInDateRange = (date, dateRange) => {
     return !dateRange.from || !dateRange.to || DateUtils.isDayInRange(date, dateRange)
 }
 
+const isArticleSelected = (article) => article.selectedIndex >= 0
+
 const getFilteredArticles = (articles, dateRange) => {
-    const selectedArticlesCount = articles.filter(article => article.selected).length
+    const selectedArticlesCount = articles.filter(article => isArticleSelected(article)).length
 
     return articles.filter(article => {
-        return isInDateRange(new Date(article.date), dateRange) && (!selectedArticlesCount || article.selected)
+        return isInDateRange(new Date(article.date), dateRange) && (!selectedArticlesCount || isArticleSelected(article))
     })
 }
 
