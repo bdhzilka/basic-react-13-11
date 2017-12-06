@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import './style.css'
+import PropTypes from 'prop-types'
 
 class CommentForm extends Component {
     static propTypes = {
+        onAddComment: PropTypes.func.isRequired
     };
 
     state = {
@@ -26,6 +28,7 @@ class CommentForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
+        this.props.onAddComment(this.state)
         this.setState({
             user: '',
             text: ''

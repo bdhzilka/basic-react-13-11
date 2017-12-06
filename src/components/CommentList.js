@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import {connect} from "react-redux";
+import {addComment} from "../AC";
 
 class CommentList extends Component {
     static propTypes = {
@@ -36,11 +38,15 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
-                <CommentForm />
+                <CommentForm onAddComment={this.onAddComment}/>
             </div>
         )
     }
+
+    onAddComment = (comment) => {
+        const {addComment, articleId} = this.props
+        addComment(comment, articleId)
+    }
 }
 
-
-export default toggleOpen(CommentList)
+export default connect(null, { addComment })(toggleOpen(CommentList))

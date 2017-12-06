@@ -59,7 +59,8 @@ class Article extends PureComponent {
             <div>
                 <button onClick = {this.increment}>increment</button>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments}
+                <CommentList articleId = {article.id}
+                             comments = {article.comments}
                              key = {this.state.counter}/>
             </div>
         )
