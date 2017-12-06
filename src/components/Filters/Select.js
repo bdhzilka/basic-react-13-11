@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { changeSelection } from '../../AC'
 
 import 'react-select/dist/react-select.css'
+import {articlesAsArraySelector} from "../../selectors";
 
 class SelectFilter extends Component {
     static propTypes = {
@@ -31,5 +32,5 @@ class SelectFilter extends Component {
 
 export default connect(state => ({
     selected: state.filters.selected,
-    articles: state.articles
+    articles: articlesAsArraySelector(state)
 }), { changeSelection })(SelectFilter)
