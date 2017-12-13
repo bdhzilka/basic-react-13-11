@@ -16,7 +16,7 @@ class CommentList extends Component {
     }
 
     componentWillReceiveProps({article, isOpen, loadCommentsByArticleId}) {
-        if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) loadCommentsByArticleId(article.id)
+        if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) loadArticleComments(article.id)
     }
 
     render() {
