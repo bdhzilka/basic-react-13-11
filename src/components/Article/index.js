@@ -1,7 +1,7 @@
 import React, {Component, PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {findDOMNode} from 'react-dom'
-import CommentList from '../CommentList'
+import CommentList from '../ArticleComments'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'

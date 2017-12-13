@@ -1,6 +1,6 @@
-import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, SUCCESS } from '../constants'
+import {ADD_COMMENT, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS, START, SUCCESS} from '../constants'
 import {arrToMap} from './utils'
-import {OrderedMap, Record} from 'immutable'
+import {Map, OrderedMap, Record} from 'immutable'
 
 const CommentRecord = Record({
     id: null,
@@ -8,8 +8,17 @@ const CommentRecord = Record({
     user: null
 })
 
+const CommentsOffsetRecord = Record({
+    offset: 0,
+    comments: [],
+    loading: false,
+    loaded: false
+})
+
 const ReducerState = Record({
-    entities: new OrderedMap({})
+    entities: new OrderedMap({}),
+    commentsOffset: new Map({}),
+    totalComments: null
 })
 
 
@@ -22,6 +31,19 @@ export default (state = new ReducerState(), action) => {
 
         case LOAD_ARTICLE_COMMENTS + SUCCESS:
             return state.mergeIn(['entities'], arrToMap(response, CommentRecord))
+
+        case LOAD_COMMENTS + START:
+            return state.setIn(['commentsOffset', payload.offset], new CommentsOffsetRecord({
+                offset: payload.offset,
+                loading: true
+            }))
+
+        case LOAD_COMMENTS + SUCCESS:
+            return state
+                .set('totalComments', response.total)
+                .setIn(['commentsOffset', payload.offset, 'loading'], false)
+                .setIn(['commentsOffset', payload.offset, 'loaded'], true)
+                .setIn(['commentsOffset', payload.offset, 'comments'], response.records)
     }
 
     return state

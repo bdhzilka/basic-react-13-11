@@ -27,3 +27,4 @@ const createMapStateToProps = () => {
 }
 
 export default connect(createMapStateToProps)(Comment)
+export {Comment as DumbComment}
