@@ -9,6 +9,12 @@ import {connect} from 'react-redux'
 import {loadArticleComments} from '../AC'
 
 class CommentList extends Component {
+    static contextTypes = {
+        store: PropTypes.object,
+        router: PropTypes.object,
+        username: PropTypes.string
+    }
+
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
         if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
             loadArticleComments(article.id)
@@ -31,6 +37,8 @@ class CommentList extends Component {
     }
 
     getBody() {
+        console.log('---', 5)
+//        console.log('--- context', this.context)
         const { article: {comments, id, commentsLoading, commentsLoaded}, isOpen } = this.props
         if (!isOpen) return null
         if (commentsLoading) return <Loader />
@@ -44,6 +52,7 @@ class CommentList extends Component {
 
         return (
             <div>
+                <h3>{this.context.username}</h3>
                 {body}
                 <CommentForm articleId = {id} />
             </div>
@@ -51,4 +60,4 @@ class CommentList extends Component {
     }
 }
 
-export default connect(null, { loadArticleComments })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))
