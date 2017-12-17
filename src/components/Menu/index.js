@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import MenuItem from './MenuItem'
+import PropTypes from "prop-types";
 
 //console.log('---', React.Fragment)
 class Menu extends Component {
@@ -7,10 +8,15 @@ class Menu extends Component {
 
     };
 
+    static contextTypes = {
+        localize: PropTypes.func
+    }
+
     render() {
+        const {localize} = this.context
         return (
             <Fragment>
-                <h2>Main menu:</h2>
+                <h2>{localize('Main Menu')}:</h2>
                 {this.props.children}
             </Fragment>
         )

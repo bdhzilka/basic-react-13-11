@@ -10,7 +10,12 @@ import Menu, {MenuItem} from './Menu'
 
 class App extends Component {
     static childContextTypes = {
-        username: PropTypes.string
+        username: PropTypes.string,
+        localize: PropTypes.func
+    }
+
+    static contextTypes = {
+        localize: PropTypes.func
     }
 
     getChildContext() {
@@ -27,15 +32,16 @@ class App extends Component {
 
     render() {
         console.log('---', 1)
+        const { localize } = this.context;
         return (
             <div>
-                <h1>App name</h1>
+                <h1>{localize('App Name')}</h1>
                 <UserForm value = {this.state.user} onChange = {this.handleUserChange}/>
                 <Menu>
-                    <MenuItem url="/counter">Counter</MenuItem>
-                    <MenuItem url="/articles">Articles</MenuItem>
-                    <MenuItem url="/filters">Filters</MenuItem>
-                    <MenuItem url="/comments/1">Comments</MenuItem>
+                    <MenuItem url="/counter">{localize('counter')}</MenuItem>
+                    <MenuItem url="/articles">{localize('Articles')}</MenuItem>
+                    <MenuItem url="/filters">{localize('Filters')}</MenuItem>
+                    <MenuItem url="/comments/1">{localize('Comments')}</MenuItem>
                 </Menu>
                 <Switch>
                     <Redirect from="/" exact to="/articles"/>

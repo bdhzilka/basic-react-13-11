@@ -22,6 +22,10 @@ class Article extends Component {
         })
     }
 
+    static contextTypes = {
+        localize: PropTypes.func
+    }
+
     constructor(props) {
         super(props)
 
@@ -37,7 +41,7 @@ class Article extends Component {
 
     componentDidCatch(err) {
         this.setState({
-            error: 'can`t display an article'
+            error: this.context.localize('can`t display an article')
         })
     }
 
@@ -55,6 +59,7 @@ class Article extends Component {
 
     render() {
         console.log('---', 4)
+        const { localize } = this.context
         if (this.state.error) return <h1>{this.state.error}</h1>
 
         const {article, isOpen, toggleOpen} = this.props
@@ -65,9 +70,9 @@ class Article extends Component {
                 <h2>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? localize('close') : localize('open')}
                     </button>
-                    <button onClick = {this.handleDelete}>delete me</button>
+                    <button onClick = {this.handleDelete}>{localize('delete me')}</button>
                 </h2>
                 <CSSTransition
                     transitionName = 'article'
@@ -79,7 +84,7 @@ class Article extends Component {
                 >
                     {this.getBody()}
                 </CSSTransition>
-                <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <h3>{localize('creation date')}: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
     }
