@@ -5,6 +5,7 @@ import {HashRouter, BrowserRouter} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import App from  './App'
 import history from '../history'
+import Localization from "./Localization";
 
 class Root extends Component {
     static propTypes = {
@@ -13,11 +14,14 @@ class Root extends Component {
 
     render() {
         return (
-            <Provider store = {this.props.store}>
-                <ConnectedRouter history={history}>
-                    <App />
-                </ConnectedRouter>
-            </Provider>
+            <Localization lang="ua">
+                <Provider store = {this.props.store}>
+                    <ConnectedRouter history={history}>
+                        <App />
+                    </ConnectedRouter>
+                </Provider>
+            </Localization>
+
         )
     }
 }

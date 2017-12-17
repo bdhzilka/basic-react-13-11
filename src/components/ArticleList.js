@@ -8,6 +8,10 @@ import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
 import {loadAllArticles} from '../AC'
 
 class ArticleList extends Accordion {
+    static contextTypes = {
+        localize: PropTypes.func
+    }
+
     componentDidMount() {
         this.props.loadAllArticles()
     }
@@ -15,7 +19,7 @@ class ArticleList extends Accordion {
     render() {
         const {articles, loading} = this.props
         if (loading) return <Loader />
-        if (!articles.length) return <h3>No Articles</h3>
+        if (!articles.length) return <h3>{this.context.localize('No Articles')}</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
             <NavLink activeStyle={{color: 'red'}} to={`/articles/${article.id}`}>{article.title}</NavLink>
         </li>)
